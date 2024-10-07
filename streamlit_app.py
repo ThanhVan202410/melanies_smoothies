@@ -22,8 +22,8 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit
 
 #convert the snowparl df to a pandas df
 pd_df = my_dataframe.to_pandas()
-st.dataframe(pd_df)
-st.stop()
+#st.dataframe(pd_df)
+#st.stop()
 
 ingredient_list = st.multiselect('Choose up to 5 ingredient'
                                  , my_dataframe
@@ -33,6 +33,9 @@ if ingredient_list :
     ingredient_string = ''
     for fruit_choosen in ingredient_list:
         ingredient_string += fruit_choosen + ' '
+        search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+        st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
+
         st.subheader(fruit_choosen + ' Nutrition information')
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
         fv_df = st.dataframe(data=fruityvice_response.json(),use_container_width=True)
