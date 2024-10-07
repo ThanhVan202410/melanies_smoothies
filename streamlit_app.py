@@ -18,15 +18,12 @@ cnx=st.connection('snowflake')
 session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
-#st.dataframe(data=my_dataframe, use_container_width=True)
 
 ingredient_list = st.multiselect('Choose up to 5 ingredient'
                                  , my_dataframe
                                  , max_selections=5)
 
 if ingredient_list : 
-    st.write(ingredient_list)
-    st.text(ingredient_list)
     ingredient_string = ''
     for fruit_choosen in ingredient_list:
         ingredient_string += fruit_choosen + ' '
