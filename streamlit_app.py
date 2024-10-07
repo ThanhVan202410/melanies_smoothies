@@ -3,7 +3,7 @@ import streamlit as st
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
-streamlit.title('Check 1')
+st.title('Check 2')
 
 # Write directly to the app
 st.title("Customize your smoothie !")
